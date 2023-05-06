@@ -21,7 +21,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 import re
 from nltk.corpus import stopwords
-
+import json
 
 #Data Paths
 REVIEW_PATH = '/kaggle/input/yelp-dataset/yelp_academic_dataset_review.json'      #Contains full review text data including the user_id that wrote the review and the business_id the review is written for.
