@@ -39,11 +39,7 @@ for data in review_data['review length']:
 print(listdata)
 
 #define mode
-m = len(listdata)
-n = len(listdata)
-mode = [0] * m
-for j in range (m):
-    mode[j] = [0] * n
+mode = [[] for _ in range(len(listdata))]
 print(mode)
 
 
@@ -57,24 +53,32 @@ def kf (x):
     return 0
 
 def shiftMode(listdata, xm):
-    sum1 = 0
-    sum2 = 0
+    weighted_sum = 0
+    total_weights = 0
     for j in range (len(listdata)):
-        sum1 = sum1 +  listdata[j]*kf(abs(listdata[j]-xm))
-        sum2 = sum2 + kf(abs(listdata[j]-xm))
-    return sum1/sum2
+        weighted_sum = weighted_sum + listdata[j]*kf(abs(listdata[j]-xm))
+        total_weights = total_weights + kf(abs(listdata[j]-xm))
+    return weighted_sum/total_weights
 
+
+C=[]
+# define clusters based on the length
 for i in range(len(listdata)):
     m = 0
-    mode[i][m] = listdata[i]
+    mode[i].append(listdata[i])
     while (abs(mode[i][m] - mode[i][m - 1]) >= t):
-        mode[i][m + 1] = shiftMode(listdata,mode[i][m])
+        mode[i].append(shiftMode(listdata,mode[i][m]))
         m = m + 1
-    mode[i][0] = mode[i][m]
+    if [mode[i][m]] not in C:
+        C.append([mode[i][m]])
 
-C = []
-for i in range(len(listdata)):
-    if ([mode[i][0]] not in C):
-        C.append([mode[i][0]])
-        
-print(C)
+# push review data to clusters
+Clusters = []
+for i in range (len(C)):
+    distances = []
+    for j in range (len(listdata)):
+        distances.append(abs(listdata[j] - C[i]))
+    index = distances.index(min(distances))
+    Clusters[i].append([review_data[index]])
+    
+print(Clusters)
