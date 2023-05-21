@@ -13,7 +13,6 @@ Student’s name: Nguyen Thi Ly Linh
 - python
 - numpy
 - opencv
-- math
 - time
 
 ## How to use
@@ -30,16 +29,29 @@ Student’s name: Nguyen Thi Ly Linh
 
 Color data; RGB 24 bit
 
-Bandwidth: 50
-
-threshold: 15
-
 ## Result
 
 ---
 
-![result.png](Project/result.png)
+| Size image | Bandwidth | Threshold | Time process |
+| --- | --- | --- | --- |
+| 64x64 | 40 | 0.01 | 1288.9805443286896 |
+| 64x64 | 40 | 10 | 211.86525511741638 |
 
 64x64
 
-timer pass 211.86525511741638
+Config:
+
+- Bandwidth: 40
+- threshold: 0.01
+- Result time need to process:1225.77977633476268
+
+timer pass 1225.77977633476268
+
+![Input.jpg](input.jpeg)
+
+Input.jpg
+
+![output.jpg](output.jpeg)
+
+output.jpg
